@@ -5,7 +5,8 @@ import {SwUpdate} from '@angular/service-worker';
 @Injectable()
 export class SwUpdateService {
   constructor(sw: SwUpdate) {
-    interval(3600).subscribe(() => {
+    interval(5000).subscribe(() => {
+      console.log('!');
       sw.checkForUpdate();
     });
 
@@ -13,12 +14,13 @@ export class SwUpdateService {
       sw
         .activateUpdate()
         .then(() => document.location.reload())
+        .catch(e => console.log('error', e));
     });
 
     sw.activated.subscribe((ev: any) => {
       console.log('Previous version: ', ev.previous);
       console.log('Current version: ', ev.current);
-    });
+    }, (e) => console.log('error', e));
   }
 
 };

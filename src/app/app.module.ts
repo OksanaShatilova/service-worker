@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import {SwUpdateService} from './swUpdate.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {WeatherService} from './weather.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,9 +14,13 @@ import { environment } from '../environments/environment';
   ],
   imports: [
     BrowserModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    HttpClientModule,
   ],
-  providers: [SwUpdateService],
+  providers: [
+    SwUpdateService,
+    WeatherService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

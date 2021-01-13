@@ -5,7 +5,7 @@ import {SwUpdate} from '@angular/service-worker';
 @Injectable()
 export class SwUpdateService {
   constructor(sw: SwUpdate) {
-    interval(50000).subscribe(() => {
+    interval(500000).subscribe(() => {
       console.log('!');
       return sw.checkForUpdate();
     });

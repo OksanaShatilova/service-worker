@@ -5,15 +5,18 @@ import {SwUpdate} from '@angular/service-worker';
 @Injectable()
 export class SwUpdateService {
   constructor(sw: SwUpdate) {
-    interval(5000).subscribe(() => {
+    interval(50000).subscribe(() => {
       console.log('!');
-      sw.checkForUpdate();
+      return sw.checkForUpdate();
     });
 
     sw.available.subscribe((event: any) => {
       sw
         .activateUpdate()
-        .then(() => document.location.reload())
+        .then(() => {
+          console.log('need reload');
+          document.location.reload();
+        })
         .catch(e => console.log('error', e));
     });
 

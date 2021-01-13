@@ -31,13 +31,13 @@
     {
       "name": "dynamicResources",
       "urls": [
-        "https://api.weatherbit.io/v2.0/current?city=Saint-Petersburg&key=1b2e41cc6ea548908cef9ea8499e4875"
+        "https://api.weatherbit.io/v2.0/**"
       ],
       "cacheConfig": {
         "strategy": "performance",
         "maxAge": "7d",
-        "timeout": "5s30u",
-        "maxSize": 500
+        "timeout": "10s30u",
+        "maxSize": 10
       }
     }
   ]

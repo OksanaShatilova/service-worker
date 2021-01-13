@@ -23,4 +23,10 @@ export class AppComponent implements OnInit {
       this.currentTemp = resp.data[0].temp;
     });
   }
+
+  getMoscowWeather(): void {
+    this.weatherService.getMoscowForecast().subscribe(resp => {
+      console.log(resp);
+    });
+  }
 }

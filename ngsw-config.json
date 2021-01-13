@@ -1,5 +1,5 @@
 {
-  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+  "$schema": "node_modules/@angular/service-worker/config/schema.json",
   "index": "/index.html",
   "assetGroups": [
     {
@@ -11,7 +11,8 @@
           "/index.html",
           "/manifest.webmanifest",
           "/*.css",
-          "/*.js"
+          "/*.js",
+          "/assets/error.html"
         ]
       }
     },
@@ -31,10 +32,10 @@
     {
       "name": "dynamicResources",
       "urls": [
-        "https://api.weatherbit.io/v2.0/current?city=Saint-Petersburg&key=1b2e41cc6ea548908cef9ea8499e4875"
+        "https://api.weatherbit.io/**"
       ],
       "cacheConfig": {
-        "strategy": "freshness",
+        "strategy": "performance",
         "maxAge": "7d",
         "timeout": "10s30u",
         "maxSize": 10

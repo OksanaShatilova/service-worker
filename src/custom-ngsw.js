@@ -17,15 +17,5 @@
 //   }
 // });
 
-
-self.addEventListener('push', function(event) {
-  let data = '';
-
-  if (event.data) {
-    data = event.data.json();
-  }
-  console.log('push', data)
-})
-
 // use all the magic of the Angular Service Worker
 importScripts('./ngsw-worker.js');

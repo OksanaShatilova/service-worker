@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
       private swUpdateService: SwUpdateService,
       public weatherService: WeatherService,
       public swPush: SwPush,
-      public pushService: PushNotificationService
+      public pushService: PushNotificationService,
     )
   {
     if (swPush.isEnabled) {
@@ -28,10 +28,8 @@ export class AppComponent implements OnInit {
         serverPublicKey: VAPID_PUBLIC
       })
         .then(subscription => {
-          console.log(subscription);
           pushService.sendSubscriptionToTheServer(subscription).subscribe();
         });
-
     }
   }
 

@@ -9,7 +9,7 @@ This application was made following the tutorial in https://malcoded.com/posts/a
 
 - Run `ng build --prod` to run the build setup, after doing which you will get a `dist` folder.
 
-- Launch the `dist/angular-push-notifications` location using a CLI web server like `http-server` by running the command `http-server dist/angular-push-notifications`.
+- Launch CLI web server by running the command `http-server dist/sw-project`.
 
 - Launch the express server from another terminal window by running command `npm run serve`. This will launch the server in `http://localhost:3000`
 

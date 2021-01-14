@@ -23,9 +23,12 @@ app.post('/subscription', (req, res) => {
 app.post('/sendNotification', (req, res) => {
   const notificationPayload = {
     notification: {
-      title: 'Valar Morghulis',
-      body: 'I am No One',
-      icon: 'assets/icons/icon-512x512.png'
+      title: req.body.title,
+      body: req.body.body,
+      icon: 'assets/pikachu.png',
+      actions:[
+        {action:"like", title: "Like"},
+        {action:"reply", title: "⤻ Reply"}]
     }
   };
 

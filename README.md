@@ -1,27 +1,22 @@
-# SwProject
+# Angular Push Notifications
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.6.
+This application was made following the tutorial in https://malcoded.com/posts/angular-push-notifications
 
-## Development server
+## Steps to run the application
+- Clone the repo.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Run `npm install` from within the cloned repo.
 
-## Code scaffolding
+- Run `ng build --prod` to run the build setup, after doing which you will get a `dist` folder.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Launch the `dist/angular-push-notifications` location using a CLI web server like `http-server` by running the command `http-server dist/angular-push-notifications`.
 
-## Build
+- Launch the express server from another terminal window by running command `npm run serve`. This will launch the server in `http://localhost:3000`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- After running the above and opening up the front-end in the browser click on the `Allow` button in notification that pops up in the browser.
 
-## Running unit tests
+- In order to get the push notification in the browser, open up Insomnia or Postman and send a `POST` request to the address `http://localhost:3000/sendNotification`. This will show up the web notification.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Note:
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+There is a need for VAPID keys (public and private keys) needed for push notifications. thhhis can be generated using a library called `web-push` which you can find in `https://github.com/web-push-libs/web-push`. You can find instructions on how to use the library for this application in the tutorial https://malcoded.com/posts/angular-push-notifications.

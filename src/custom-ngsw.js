@@ -1,3 +1,5 @@
+// use all the magic of the Angular Service Worker
+importScripts('./ngsw-worker.js');
 
 // listen to every fetch event
 // self.addEventListener('fetch', function (event) {
@@ -17,5 +19,33 @@
 //   }
 // });
 
-// use all the magic of the Angular Service Worker
-importScripts('./ngsw-worker.js');
+self.addEventListener('sync', function(event) {
+  if (event.tag == 'post-data') {
+    event.waitUntil(getFakeData())
+  }
+});
+
+
+function getFakeData() {
+  const obj = {
+    name: 'oksana',
+    job: 'frontend'
+  }
+  fetch('https://reqres.in/api/user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(obj)
+  })
+    .then((resp) =>{
+      resp.json().then(r => {
+        console.log(r)
+        return Promise.resolve();
+      })
+    })
+    .catch(() => Promise.reject())
+}
+
+
+

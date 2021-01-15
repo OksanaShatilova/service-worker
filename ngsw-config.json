@@ -32,7 +32,7 @@
     {
       "name": "dynamicResources",
       "urls": [
-        "https://api.weatherbit.io/**"
+        "https://api.weatherbit.io/v2.0/current?city=Saint-Petersburg**"
       ],
       "cacheConfig": {
         "strategy": "performance",

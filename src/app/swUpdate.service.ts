@@ -6,17 +6,14 @@ import {SwUpdate} from '@angular/service-worker';
 export class SwUpdateService {
   constructor(sw: SwUpdate) {
     interval(500000).subscribe(() => {
-      console.log('!');
+      console.log('checked for update');
       return sw.checkForUpdate();
     });
 
     sw.available.subscribe((event: any) => {
       sw
         .activateUpdate()
-        .then(() => {
-          console.log('need reload');
-          document.location.reload();
-        })
+        .then(() => document.location.reload())
         .catch(e => console.log('error', e));
     });
 

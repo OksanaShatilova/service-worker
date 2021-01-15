@@ -38,11 +38,32 @@ export class AppComponent implements OnInit {
       this.currentCity = resp.data[0].city_name;
       this.currentTemp = resp.data[0].temp;
     });
+
+    if ('serviceWorker' in navigator && 'SyncManager' in window) {
+      navigator.serviceWorker.ready
+        .then(sw => {
+          sw.sync.register('sync-request');
+        });
+    }
   }
 
-  getMoscowWeather(): void {
-    this.weatherService.getMoscowForecast().subscribe(resp => {
-      console.log(resp);
+  // public getMoscowWeather(): void {
+  //   this.weatherService.getMoscowForecast().subscribe(resp => {
+  //     console.log(resp);
+  //   });
+  // }
+
+  public backgroundSync(): void {
+    navigator.serviceWorker.ready.then((swRegistration) => {
+      return swRegistration.sync.register('post-data');
+    }).catch((e) => {
+      console.log(e);
     });
+  }
+
+  public postSync(): void {
+    this.weatherService.sendFakePostRequest().subscribe(
+      (res) => console.log(res),
+      (e) => this.backgroundSync());
   }
 }

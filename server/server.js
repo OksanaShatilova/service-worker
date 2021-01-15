@@ -26,9 +26,6 @@ app.post('/sendNotification', (req, res) => {
       title: req.body.title,
       body: req.body.body,
       icon: 'assets/pikachu.png',
-      actions:[
-        {action:"like", title: "Like"},
-        {action:"reply", title: "⤻ Reply"}]
     }
   };
 

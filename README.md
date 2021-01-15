@@ -7,3 +7,6 @@
 
 - In order to get the push notification in the browser, open up Insomnia or Postman and send a `POST` request to the address `http://localhost:3000/sendNotification`. This will show up the web notification.
 
+- Для тестирования push-уведомлений можно через postman отправлять запрос на http://localhost:3000/sendNotification,
+передавая объект со свойствами title и body
+

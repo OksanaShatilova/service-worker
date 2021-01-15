@@ -1,19 +1,19 @@
 
 // прослушка события fetch для отображения кастомной offline страницы
-self.addEventListener('fetch', function (event) {
-  const request = event.request;
-  // проверка, что запрашивается страница, а не json
-  if (request.method === "GET" && request.destination === "document") {
-
-    event.respondWith(
-      fetch(request).catch(function (error) {
-        console.error("[onfetch] Failed. Serving cached offline fallback", error);
-
-        // return offline page from cache instead
-        return caches.match("/assets/error.html");
-      }));
-  }
-});
+// self.addEventListener('fetch', function (event) {
+//   const request = event.request;
+//   // проверка, что запрашивается страница, а не json
+//   if (request.method === "GET" && request.destination === "document") {
+//
+//     event.respondWith(
+//       fetch(request).catch(function (error) {
+//         console.error("[onfetch] Failed. Serving cached offline fallback", error);
+//
+//         // return offline page from cache instead
+//         return caches.match("/assets/error.html");
+//       }));
+//   }
+// });
 
 
 // прослушка события sync для фоновой синхронизации отправки данных

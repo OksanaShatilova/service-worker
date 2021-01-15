@@ -66,10 +66,4 @@ export class AppComponent implements OnInit {
       (e) => this.backgroundSync());
   }
 
-
-  // public getMoscowWeather(): void {
-  //   this.weatherService.getMoscowForecast().subscribe(resp => {
-  //     console.log(resp);
-  //   });
-  // }
 }

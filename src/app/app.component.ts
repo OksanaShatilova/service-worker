@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
       public pushService: PushNotificationService,
     )
   {
+
+    // проверка доступности swPush и оформление подписки
     if (swPush.isEnabled) {
       swPush.requestSubscription({
         serverPublicKey: VAPID_PUBLIC
@@ -39,6 +41,7 @@ export class AppComponent implements OnInit {
       this.currentTemp = resp.data[0].temp;
     });
 
+    // проверка доступности SyncManager и активация синхронизации
     if ('serviceWorker' in navigator && 'SyncManager' in window) {
       navigator.serviceWorker.ready
         .then(sw => {
@@ -47,12 +50,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // public getMoscowWeather(): void {
-  //   this.weatherService.getMoscowForecast().subscribe(resp => {
-  //     console.log(resp);
-  //   });
-  // }
-
+  // регистрация запроса для фоновой синхронизации
   public backgroundSync(): void {
     navigator.serviceWorker.ready.then((swRegistration) => {
       return swRegistration.sync.register('post-data');
@@ -61,9 +59,17 @@ export class AppComponent implements OnInit {
     });
   }
 
+  // если есть сеть - запрос с сервера, если сети нет - отправка запроса в отложенные для синхронизации
   public postSync(): void {
     this.weatherService.sendFakePostRequest().subscribe(
       (res) => console.log(res),
       (e) => this.backgroundSync());
   }
+
+
+  // public getMoscowWeather(): void {
+  //   this.weatherService.getMoscowForecast().subscribe(resp => {
+  //     console.log(resp);
+  //   });
+  // }
 }

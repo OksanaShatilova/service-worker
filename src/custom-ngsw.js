@@ -1,24 +1,22 @@
-// use all the magic of the Angular Service Worker
-importScripts('./ngsw-worker.js');
 
-// listen to every fetch event
-// self.addEventListener('fetch', function (event) {
-//   const request = event.request;
-//
-//   // filter for html document fetches (should only result in one single fetch) --> index.html
-//   if (request.method === "GET" && request.destination === "document") {
-//
-//     // only intercept if there was a problem fetching index.html
-//     event.respondWith(
-//       fetch(request).catch(function (error) {
-//         console.error("[onfetch] Failed. Serving cached offline fallback", error);
-//
-//         // return offline page from cache instead
-//         return caches.match("/assets/error.html");
-//       }));
-//   }
-// });
+// прослушка события fetch для отображения кастомной offline страницы
+self.addEventListener('fetch', function (event) {
+  const request = event.request;
+  // проверка, что запрашивается страница, а не json
+  if (request.method === "GET" && request.destination === "document") {
 
+    event.respondWith(
+      fetch(request).catch(function (error) {
+        console.error("[onfetch] Failed. Serving cached offline fallback", error);
+
+        // return offline page from cache instead
+        return caches.match("/assets/error.html");
+      }));
+  }
+});
+
+
+// прослушка события sync для фоновой синхронизации отправки данных
 self.addEventListener('sync', function(event) {
   if (event.tag == 'post-data') {
     event.waitUntil(getFakeData())
@@ -26,6 +24,8 @@ self.addEventListener('sync', function(event) {
 });
 
 
+// дублирование запроса на отправку данных
+// (лучше использовать IndexDB, чтобы не дублировать запрос, а брать его оттуда)
 function getFakeData() {
   const obj = {
     name: 'oksana',
@@ -47,5 +47,5 @@ function getFakeData() {
     .catch(() => Promise.reject())
 }
 
-
-
+// use all the magic of the Angular Service Worker
+importScripts('./ngsw-worker.js');
